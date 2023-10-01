@@ -22,7 +22,7 @@ def teardown(exception):
 
 @app.errorhandler(404)
 def not_found(error):
-    return jsonify(error="Not found"), 404
+    return jsonify({"error"="Not found"}), 404
 
 
 if __name__ == "__main__":
@@ -31,5 +31,5 @@ if __name__ == "__main__":
     port = int(os.getenv('HBNB_API_PORT', '5000'))
     """Run the Flask server"""
     app.run(
-        host=host, port=port, threaded=True
+        host=host, port=port, threaded=True, debug=True
         )
