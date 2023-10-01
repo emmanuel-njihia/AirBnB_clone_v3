@@ -23,3 +23,8 @@ def stat():
         states=storage.count('State'),
         users=storage.count('User')
     )
+    for cls in classes:
+        count = storage.count(cls)
+        stat[cls] = count
+
+    return jsonify(stat)
