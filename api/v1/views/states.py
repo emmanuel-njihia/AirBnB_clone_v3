@@ -2,18 +2,21 @@
 """script that contains API"""
 
 from api.v1.views import app_views
-from flask import jsonify, abort
+from flask import jsonify, abort, request
 from models import storage
+from models.state import State
 
 
 @app_views.route('/states', methods=['GET'], strict_slashes=False)
 def get_states():
+    """Gets the state objects"""
     states = storage.all('State').values()
     return jsonify([state.to_dict() for state in states])
 
 
 @app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
 def get_state(state_id):
+    """Get state onject"""
     state = storage.get('State', state_id)
     if state is None:
         abort(404)
@@ -23,6 +26,7 @@ def get_state(state_id):
 @app_views.route('/states/<state_id>',
                  methods=['DELETE'], strict_slashes=False)
 def delete_state(state_id):
+    """Deletes a state object"""
     state = storage.get('State', state_id)
     if state is None:
         abort(404)
@@ -33,6 +37,7 @@ def delete_state(state_id):
 
 @app_views.route('/states', methods=['POST'], strict_slashes=False)
 def create_state():
+    """Creates new state object"""
     request_json = request.get_json()
 
     if not request_json:
@@ -50,6 +55,7 @@ def create_state():
 
 @app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
 def update_state(state_id):
+    """updates state object"""
     state = storage.get('State', state_id)
     if state is None:
         abort(404)
