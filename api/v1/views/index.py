@@ -6,12 +6,6 @@ from api.v1.views import app_views
 from models import storage
 
 
-@app_views.route('/status', methods=['GET'], strict_slashes=False)
-def status():
-    """ Route on object app_views that returns a JSON"""
-    return jsonify(status="OK")
-
-
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def get_stats():
     stats = {}
