@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-app
+app view for the api
 """
 
 from flask import Flask, jsonify
@@ -21,7 +21,7 @@ app.register_blueprint(app_views)
 @app.teardown_appcontext
 def teardown(exception):
     """
-    teardown function
+    teardown  to close storage
     """
     storage.close()
 
@@ -29,17 +29,17 @@ def teardown(exception):
 @app.errorhandler(404)
 def handle_404(exception):
     """
-    handles 404 error
-    :return: returns 404 json
+    function to handle 404 json error
     """
     data = {
         "error": "Not found"
     }
 
-    resp = jsonify(data)
-    resp.status_code = 404
+    response = jsonify(data)
+    response.status_code = 404
 
-    return(resp)
+    return(response)
+
 
 if __name__ == "__main__":
     app.run(getenv("HBNB_API_HOST"), getenv("HBNB_API_PORT"))
