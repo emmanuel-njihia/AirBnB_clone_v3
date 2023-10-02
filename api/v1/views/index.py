@@ -5,34 +5,37 @@ from flask import jsonify
 from api.v1.views import app_views
 from models import storage
 
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
-from models.state import State
-from models.user import User
 
-@app_views.route('/status')
+@app_views.route("/status", methods=['GET'], strict_slashes=False)
 def get_status():
-    """define api status"""
-    return jsonify(status='OK')
+    """
+    Return a JSON response with the status "OK".
+    """
+    data = {
+        "status": "OK"
+    }
+
+    response = jsonify(data)
+    response.status_code = 200
+
+    return response
 
 
-@app_views.route('/stats', methods=['GET'], strict_slashes=False)
+@app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def get_stats():
-    stats = {}
+    """
+    Return JSON response with counts of different types of objects.
+    """
     classes = {
-            'users': User,
-            'states': State,
-            'cities': City,
-            'amenities': Amenity,
-            'places': Place,
-            'reviews': Review
-            }
-    """returns the number of each objects by type"""
+        "amenities": storage.count("Amenity"),
+        "cities": storage.count("City"),
+        "places": storage.count("Place"),
+        "reviews": storage.count("Review"),
+        "states": storage.count("State"),
+        "users": storage.count("User"),
+    }
 
-    for cls in classes:
-        count = storage.count(cls)
-        stats[cls.lower() + 's'] = count
+    response = jsonify(classes)
+    response.status_code = 200
 
-    return jsonify(stats)
+    return response
