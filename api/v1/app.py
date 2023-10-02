@@ -10,6 +10,8 @@ from api.v1.views import app_views
 
 app = Flask(__name__)
 
+CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
+
 """Register blueprint to Flask instance app"""
 app.register_blueprint(app_views)
 
