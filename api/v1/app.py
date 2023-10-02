@@ -1,39 +1,45 @@
 #!/usr/bin/python3
-"""starting the api """
+"""
+app
+"""
 
-from os import getenv
 from flask import Flask, jsonify
 from flask_cors import CORS
-from models import storage
+from os import getenv
+
 from api.v1.views import app_views
+from models import storage
 
 
-"""instance of Flask"""
 app = Flask(__name__)
 
-"""Enable CORS for all routes"""
 CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
-"""Register blueprint to Flask instance app"""
 app.register_blueprint(app_views)
 
 
 @app.teardown_appcontext
 def teardown(exception):
-    """Method to handle teardown"""
+    """
+    teardown function
+    """
     storage.close()
 
 
 @app.errorhandler(404)
-def not_found(error):
-    return jsonify({"error": "Not found"}), 404
+def handle_404(exception):
+    """
+    handles 404 error
+    :return: returns 404 json
+    """
+    data = {
+        "error": "Not found"
+    }
 
+    resp = jsonify(data)
+    resp.status_code = 404
+
+    return(resp)
 
 if __name__ == "__main__":
-    """Host and port from environment variables"""
-    host = os.getenv('HBNB_API_HOST', '0.0.0.0')
-    port = int(os.getenv('HBNB_API_PORT', '5000'))
-    """Run the Flask server"""
-    app.run(
-        host=host, port=port, threaded=True
-        )
+    app.run(getenv("HBNB_API_HOST"), getenv("HBNB_API_PORT"))
