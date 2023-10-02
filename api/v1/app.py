@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """starting the api """
 
-import os
+from os import getenv
 from flask import Flask, jsonify
 from flask_cors import CORS
 from models import storage
