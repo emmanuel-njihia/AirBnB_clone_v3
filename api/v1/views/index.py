@@ -15,7 +15,14 @@ def get_status():
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def get_stats():
     stats = {}
-    classes = ['User', 'State', 'City', 'Amenity', 'Place', 'Review']
+    classes = {
+            'users': User,
+            'states': State,
+            'cities': City,
+            'amenities': Amenity,
+            'places': Place,
+            'reviews': Review
+            }
     """returns the number of each objects by type"""
 
     for cls in classes:
