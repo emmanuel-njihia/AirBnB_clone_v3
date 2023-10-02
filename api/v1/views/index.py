@@ -26,7 +26,7 @@ def get_stats():
     """
     Return JSON response with counts of different types of objects.
     """
-    classes = {
+    data = {
         "amenities": storage.count("Amenity"),
         "cities": storage.count("City"),
         "places": storage.count("Place"),
@@ -35,7 +35,7 @@ def get_stats():
         "users": storage.count("User"),
     }
 
-    response = jsonify(classes)
+    response = jsonify(data)
     response.status_code = 200
 
     return response
