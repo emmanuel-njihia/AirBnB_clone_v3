@@ -154,11 +154,7 @@ EOF  all  create  destroy  help  quit  show  update
 No known bugs at this time. 
 
 ## Authors
-Wellington Mwadali -  [Github](https://github.com/wellingtonmwadali)/ [Twitter](https://twitter.com/mwadzaliii)  
-Alex Miricho -  [Github](https://github.com/gichbuoy)/ [Twitter](https://twitter.com/alexmaina)  
-Alexa Orrico - [Github](https://github.com/alexaorrico) / [Twitter](https://twitter.com/alexa_orrico)  
-Jennifer Huang - [Github](https://github.com/jhuang10123) / [Twitter](https://twitter.com/earthtojhuang)
-
-Second part of Airbnb: Joann Vuong
+Emmanuel Ndua -  [Github]((https://github.com/emmanuel-njihia)
+Valentone Nyongesa -  [Github](https://github.com/valentinenyongesa)
 ## License
 Public Domain. No copy write protection. 
